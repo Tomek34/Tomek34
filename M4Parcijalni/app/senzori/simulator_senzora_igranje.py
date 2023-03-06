@@ -23,10 +23,10 @@ class TemperaturSensore(Sensor):
 
     def __init__(self):
         self.name = "TEMPERATURA"
-        self.value = 0
+        self.value = self.generate_value()
 
     def generate_value(self):
-        self.value = randint(-10, 100)
+        return randint(-10, 100)
 
 class TSensor(Sensor):
     name = "TEMPERATURA"
@@ -140,38 +140,3 @@ podaci_iz_prognoze = {
 }
 
 """
-
-"""def retrieve_data():
-    data = raspberry_pi.get_data()
-    print(data)
-
-import tkinter as tk
-
-root = tk.Tk()
-
-button = tk.Button(root, text="Retrieve data", command=retrieve_data)
-button.pack()
-
-root.mainloop()
-
-def compare_data(raspberry_pi_data, forecast_data):
-    for timestamp, forecast in forecast_data.items():
-        print(f"Timestamp: {timestamp}")
-        for sensor_name, forecast_value in forecast.items():
-            for raspberry_pi_sensor in raspberry_pi_data:
-                if raspberry_pi_sensor.name == sensor_name:
-                    raspberry_pi_value = raspberry_pi_sensor.value
-                    if forecast_value == raspberry_pi_value:
-                        print(f"{sensor_name}: OK")
-                    else:
-                        print(f"{sensor_name}: Error")
-
-forecast_data = {
-    "2023-03-02T21:00": {
-        "TEMPERATURA": 23,
-        "TLAK": 1015.3,
-        "VLAGA": 54
-    }
-}
-
-compare_data(raspberry_pi.get_data(), forecast_data)"""

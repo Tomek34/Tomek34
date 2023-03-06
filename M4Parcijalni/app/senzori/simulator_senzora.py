@@ -1,4 +1,4 @@
-
+from zajednicko.rezultat_mjerenja import RezultatMjerenja
 from random import randint
 
 
@@ -12,6 +12,11 @@ class Jagodica:
             data.append(senzor.dohvati_podatke())
         return data
 
+    def get_data_with_class(self):
+        data = []
+        for senzor in self.senzori:
+            data.append(senzor.dohvati_podatke_u_klasu())
+        return data
 
 class SensorZaRaspberryPi:
     def __init__(self, ime_senzora, max_vrijednost, min_vrijednost, mjerna_jednica):
@@ -32,6 +37,14 @@ class SensorZaRaspberryPi:
             "vrijednost": self.value,
             "mjerna_jedinica": self.mjerna_jedinica
         }
+    
+    def dohvati_podatke_u_klasu(self):
+        self.value = self.generiraj_vrijednost()
+        return RezultatMjerenja(
+            vrijednost=self.value,
+            mjerna_jedinica=self.mjerna_jedinica,
+            tip=self.name
+        )
 
 senzor_temperature = SensorZaRaspberryPi(
     ime_senzora="TEMPERATURA", max_vrijednost=180, min_vrijednost=-40, mjerna_jednica="°C"
